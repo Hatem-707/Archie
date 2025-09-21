@@ -1,6 +1,5 @@
 import 'package:feetly/auth/auth_service.dart';
 import 'package:feetly/controllers/page_provider.dart';
-import 'package:feetly/views/excercises_view.dart';
 import 'package:feetly/views/facts_view.dart';
 import 'package:feetly/views/settings_page.dart';
 import 'package:feetly/views/shoes_view.dart';
@@ -26,7 +25,15 @@ class HomePage extends StatelessWidget {
         if (provider.currentPage == 0) {
           mainView = FactScreen();
         } else if (provider.currentPage == 1) {
-          mainView = ExercisesView();
+          mainView = Center(
+            child: Text(
+              "Exercise",
+              style: theme.textTheme.displayMedium!.copyWith(
+                color: theme.colorScheme.primary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          );
         } else {
           mainView = ShoesView();
         }
