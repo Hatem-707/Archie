@@ -79,7 +79,7 @@ class TransitionRequirements {
         scenario.c != null ? pose.landmarks[scenario.c] : null,
       );
       if (angle != -1 &&
-          (angle <= scenario.minAngle && angle >= scenario.maxAngle)) {
+          (angle <= scenario.minAngle || angle >= scenario.maxAngle)) {
         fail = true;
         message = scenario.errorMessage;
         break;
