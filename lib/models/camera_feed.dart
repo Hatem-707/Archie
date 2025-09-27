@@ -61,6 +61,9 @@ class _CameraFeedState extends State<CameraFeed> {
       case "Body Weight Squats":
         exerciseTracker = ExerciseTracker.fromType(ExerciseType.squat);
         return;
+      case "Single Leg Glute Bridge":
+        exerciseTracker = ExerciseTracker.fromType(ExerciseType.gluteBridge);
+        return;
       default:
         exerciseTracker = ExerciseTracker.fromType(ExerciseType.calfRaise);
         return;

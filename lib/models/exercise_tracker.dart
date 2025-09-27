@@ -2,7 +2,13 @@ import 'package:feetly/controllers/exercise_form_provider.dart';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
 import 'dart:math';
 
-enum ExerciseType { squat, calfRaise, heelStretch, singleLegStance }
+enum ExerciseType {
+  squat,
+  calfRaise,
+  heelStretch,
+  singleLegStance,
+  gluteBridge,
+}
 
 class Scenario {
   Scenario({
@@ -34,6 +40,7 @@ class TransitionRequirements {
   final List<Scenario> failPaths;
   String message;
   final String currentPose;
+  String? errorMessage;
 
   int evaluateRequirments(Pose pose) {
     bool successPathSucceeded = true;
@@ -81,7 +88,7 @@ class TransitionRequirements {
       if (angle != -1 &&
           (angle <= scenario.minAngle || angle >= scenario.maxAngle)) {
         fail = true;
-        message = scenario.errorMessage;
+        errorMessage = scenario.errorMessage;
         break;
       }
     }
@@ -123,6 +130,129 @@ class ExerciseTracker {
   });
   factory ExerciseTracker.fromType(ExerciseType type) {
     switch (type) {
+      case ExerciseType.gluteBridge:
+        return ExerciseTracker(
+          exerciseLength: 2,
+          importantLandmarks: {
+            PoseLandmarkType.leftAnkle,
+            PoseLandmarkType.rightAnkle,
+            PoseLandmarkType.leftKnee,
+            PoseLandmarkType.rightKnee,
+            PoseLandmarkType.leftHip,
+            PoseLandmarkType.rightHip,
+            PoseLandmarkType.leftShoulder,
+            PoseLandmarkType.rightShoulder,
+          },
+          transitions: [
+            TransitionRequirements(
+              successPath: [
+                Scenario(
+                  a: PoseLandmarkType.rightShoulder,
+                  b: PoseLandmarkType.rightHip,
+                  c: PoseLandmarkType.rightKnee,
+                  minAngle: 150,
+                  maxAngle: 180,
+                  errorMessage: "",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.leftShoulder,
+                  b: PoseLandmarkType.leftHip,
+                  c: PoseLandmarkType.leftKnee,
+                  minAngle: 70,
+                  maxAngle: 130,
+                  errorMessage: "",
+                ),
+              ],
+              alternatePath: [
+                Scenario(
+                  a: PoseLandmarkType.leftShoulder,
+                  b: PoseLandmarkType.leftHip,
+                  c: PoseLandmarkType.leftKnee,
+                  minAngle: 150,
+                  maxAngle: 180,
+                  errorMessage: "",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.rightShoulder,
+                  b: PoseLandmarkType.rightHip,
+                  c: PoseLandmarkType.rightKnee,
+                  minAngle: 70,
+                  maxAngle: 130,
+                  errorMessage: "",
+                ),
+              ],
+              failPaths: [
+                Scenario(
+                  a: PoseLandmarkType.leftHip,
+                  b: PoseLandmarkType.leftKnee,
+                  c: PoseLandmarkType.leftAnkle,
+                  minAngle: 30,
+                  maxAngle: 180,
+                  errorMessage: "Your legs are too close to you",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.leftHip,
+                  b: PoseLandmarkType.leftKnee,
+                  c: PoseLandmarkType.leftAnkle,
+                  minAngle: 0,
+                  maxAngle: 140,
+                  errorMessage: "Your legs aren't bent enough",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.rightHip,
+                  b: PoseLandmarkType.rightKnee,
+                  c: PoseLandmarkType.rightAnkle,
+                  minAngle: 30,
+                  maxAngle: 180,
+                  errorMessage: "Your legs are too close to you",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.rightHip,
+                  b: PoseLandmarkType.rightKnee,
+                  c: PoseLandmarkType.rightAnkle,
+                  minAngle: 0,
+                  maxAngle: 140,
+                  errorMessage: "Your legs aren't bent enough",
+                ),
+              ],
+              message: "Thrust your hips, and raise a leg",
+              currentPose: "Laying with bent legs",
+            ),
+            TransitionRequirements(
+              successPath: [
+                Scenario(
+                  a: PoseLandmarkType.rightShoulder,
+                  b: PoseLandmarkType.rightHip,
+                  c: PoseLandmarkType.rightKnee,
+                  minAngle: 80,
+                  maxAngle: 140,
+                  errorMessage: "",
+                ),
+              ],
+              alternatePath: [
+                Scenario(
+                  a: PoseLandmarkType.leftShoulder,
+                  b: PoseLandmarkType.leftHip,
+                  c: PoseLandmarkType.leftKnee,
+                  minAngle: 80,
+                  maxAngle: 140,
+                  errorMessage: "",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.rightShoulder,
+                  b: PoseLandmarkType.rightHip,
+                  c: PoseLandmarkType.rightKnee,
+                  minAngle: 70,
+                  maxAngle: 130,
+                  errorMessage: "",
+                ),
+              ],
+              failPaths: [],
+              message: "Hold your position then descend to",
+              currentPose: "Single Glute Bridge",
+            ),
+          ],
+        );
       case ExerciseType.squat:
         return ExerciseTracker(
           exerciseLength: 2,
@@ -454,8 +584,9 @@ class ExerciseTracker {
             transitions[currentState].message; // Update to next state's message
         break;
       case -1: // Fail
+        message = transitions[currentState].errorMessage!;
+        if (errorFlag) currentState = 0;
         errorFlag = true;
-        message = transitions[currentState].message;
         break;
       default: // Neutral
         message = transitions[currentState].message;
