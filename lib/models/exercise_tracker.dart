@@ -95,7 +95,11 @@ class TransitionRequirements {
     return (fail) ? -1 : ((successPathSucceeded) ? 1 : 0);
   }
 
-  double calculateAngle(PoseLandmark? a, PoseLandmark? b, PoseLandmark? c) {
+  static double calculateAngle(
+    PoseLandmark? a,
+    PoseLandmark? b,
+    PoseLandmark? c,
+  ) {
     if (a == null || b == null) {
       return -1; // Indicate missing landmarks
     }
@@ -103,7 +107,11 @@ class TransitionRequirements {
     final double result;
     if (c == null) {
       // Angle of the line segment with the horizontal axis
-      result = atan2(a.y - b.y, a.x - b.x) * 180 / pi;
+      if (a.x != b.x) {
+        result = atan2(a.y - b.y, a.x - b.x) * 180 / pi;
+      } else {
+        result = 90;
+      }
     } else {
       // Angle at vertex b using the law of cosines
       double ab = sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
@@ -127,6 +135,9 @@ class ExerciseTracker {
     required this.transitions,
     required this.importantLandmarks,
     required this.exerciseLength,
+    this.targetAngle,
+    this.keyJoints,
+    this.maxAngle,
   });
   factory ExerciseTracker.fromType(ExerciseType type) {
     switch (type) {
@@ -256,6 +267,16 @@ class ExerciseTracker {
       case ExerciseType.squat:
         return ExerciseTracker(
           exerciseLength: 2,
+          targetAngle: 60,
+          maxAngle: false,
+          keyJoints: [
+            PoseLandmarkType.leftAnkle,
+            PoseLandmarkType.leftKnee,
+            PoseLandmarkType.leftHip,
+            PoseLandmarkType.rightAnkle,
+            PoseLandmarkType.rightKnee,
+            PoseLandmarkType.rightHip,
+          ],
           importantLandmarks: {
             PoseLandmarkType.leftAnkle,
             PoseLandmarkType.rightAnkle,
@@ -265,6 +286,8 @@ class ExerciseTracker {
             PoseLandmarkType.rightHip,
             PoseLandmarkType.leftShoulder,
             PoseLandmarkType.rightShoulder,
+            PoseLandmarkType.leftHeel,
+            PoseLandmarkType.rightHeel,
           },
           transitions: [
             TransitionRequirements(
@@ -288,16 +311,7 @@ class ExerciseTracker {
                   errorMessage: "",
                 ),
               ],
-              failPaths: [
-                Scenario(
-                  a: PoseLandmarkType.leftShoulder,
-                  b: PoseLandmarkType.leftHip,
-                  c: PoseLandmarkType.leftAnkle,
-                  minAngle: 150,
-                  maxAngle: 180,
-                  errorMessage: "Keep your back straight",
-                ),
-              ],
+              failPaths: [],
             ),
             TransitionRequirements(
               currentPose: "Sqaut pose",
@@ -320,7 +334,38 @@ class ExerciseTracker {
                   errorMessage: "",
                 ),
               ],
-              failPaths: [],
+              failPaths: [
+                Scenario(
+                  a: PoseLandmarkType.rightHip,
+                  b: PoseLandmarkType.rightKnee,
+                  c: PoseLandmarkType.rightAnkle,
+                  minAngle: 45,
+                  maxAngle: 180,
+                  errorMessage: "You Went too far down",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.leftHip,
+                  b: PoseLandmarkType.leftKnee,
+                  c: PoseLandmarkType.leftAnkle,
+                  minAngle: 45,
+                  maxAngle: 180,
+                  errorMessage: "You Went too far down",
+                ),
+                // Scenario(
+                //   a: PoseLandmarkType.leftKnee,
+                //   b: PoseLandmarkType.leftFootIndex,
+                //   minAngle: 0,
+                //   maxAngle: 90,
+                //   errorMessage: "Your knee is past your foot",
+                // ),
+                // Scenario(
+                //   a: PoseLandmarkType.rightKnee,
+                //   b: PoseLandmarkType.rightFootIndex,
+                //   minAngle: 0,
+                //   maxAngle: 90,
+                //   errorMessage: "Your knee is past your foot",
+                // ),
+              ],
             ),
           ],
         );
@@ -548,6 +593,21 @@ class ExerciseTracker {
   Set<PoseLandmarkType> importantLandmarks;
   String message = "";
   bool errorFlag = false;
+  double peakAngle = 0;
+  final double? targetAngle;
+  final List<PoseLandmarkType>? keyJoints;
+  final bool? maxAngle;
+
+  bool importantLandmarksConfidence(Pose pose) {
+    for (PoseLandmarkType type in importantLandmarks) {
+      if (pose.landmarks[type] == null) return false;
+      if (pose.landmarks[type]!.likelihood < 0.7) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   void advanceState(List<Pose> poses, ExerciseFormProvider provider) {
     if (poses.isEmpty) {
       errorFlag = true;
@@ -557,9 +617,8 @@ class ExerciseTracker {
     }
 
     Pose pose = poses[0];
-    final Set<PoseLandmarkType> detectedTypes = pose.landmarks.keys.toSet();
 
-    if (!detectedTypes.containsAll(importantLandmarks)) {
+    if (!importantLandmarksConfidence(pose)) {
       errorFlag = true;
       message = "Not all the relevant joints are in view";
       provider.updateExerciseForm(!errorFlag, message, "No pose info");
@@ -571,16 +630,67 @@ class ExerciseTracker {
 
     switch (evaluation) {
       case 1: // Success
-        if (currentState == exerciseLength - 1) {
-          provider.increaseRepCount();
+        if (targetAngle != null && maxAngle != null) {
+          if (maxAngle!) {
+            double currentAngle = TransitionRequirements.calculateAngle(
+              pose.landmarks[keyJoints![0]],
+              pose.landmarks[keyJoints![1]],
+              pose.landmarks[keyJoints![2]],
+            );
+            currentAngle = max(
+              currentAngle,
+              TransitionRequirements.calculateAngle(
+                pose.landmarks[keyJoints![3]],
+                pose.landmarks[keyJoints![4]],
+                pose.landmarks[keyJoints![5]],
+              ),
+            );
+            peakAngle = max(peakAngle, currentAngle);
+          } else {
+            double currentAngle = TransitionRequirements.calculateAngle(
+              pose.landmarks[keyJoints![0]],
+              pose.landmarks[keyJoints![1]],
+              pose.landmarks[keyJoints![2]],
+            );
+            currentAngle = min(
+              currentAngle,
+              TransitionRequirements.calculateAngle(
+                pose.landmarks[keyJoints![3]],
+                pose.landmarks[keyJoints![4]],
+                pose.landmarks[keyJoints![5]],
+              ),
+            );
+            peakAngle = min(peakAngle, currentAngle);
+          }
         }
-        currentState = (currentState + 1) % exerciseLength;
-        message =
-            transitions[currentState].message; // Update to next state's message
+        if (currentState == exerciseLength - 1 && targetAngle == null) {
+          provider.increaseRepCount();
+          message = transitions[currentState].message;
+        } else if (currentState == exerciseLength - 1) {
+          if (maxAngle!) {
+            if (peakAngle >= targetAngle!) {
+              provider.increaseRepCount();
+              message = transitions[currentState].message;
+            } else {
+              message = "You didn't do the full range of motion";
+              errorFlag = true;
+            }
+          } else {
+            if (peakAngle <= targetAngle!) {
+              provider.increaseRepCount();
+              message = transitions[currentState].message;
+            } else {
+              message = "You didn't do the full range of motion";
+              errorFlag = true;
+            }
+          }
+        }
+        currentState =
+            (currentState + 1) %
+            exerciseLength; // Update to next state's message
         break;
       case -1: // Fail
         message = transitions[currentState].errorMessage!;
-        if (errorFlag) currentState = 0;
         errorFlag = true;
         break;
       default: // Neutral
