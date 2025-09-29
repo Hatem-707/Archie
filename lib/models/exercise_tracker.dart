@@ -108,7 +108,7 @@ class TransitionRequirements {
     if (c == null) {
       // Angle of the line segment with the horizontal axis
       if (a.x != b.x) {
-        result = atan2(a.y - b.y, a.x - b.x) * 180 / pi;
+        result = (atan2(a.y - b.y, a.x - b.x) * 180 / pi) % 90;
       } else {
         result = 90;
       }
@@ -153,6 +153,8 @@ class ExerciseTracker {
             PoseLandmarkType.rightHip,
             PoseLandmarkType.leftShoulder,
             PoseLandmarkType.rightShoulder,
+            PoseLandmarkType.leftElbow,
+            PoseLandmarkType.rightElbow,
           },
           transitions: [
             TransitionRequirements(
@@ -258,7 +260,25 @@ class ExerciseTracker {
                   errorMessage: "",
                 ),
               ],
-              failPaths: [],
+              failPaths: [
+                // Additional fail conditions for single leg glute bridge
+                Scenario(
+                  a: PoseLandmarkType.leftHip,
+                  b: PoseLandmarkType.leftShoulder,
+                  c: null,
+                  minAngle: 10,
+                  maxAngle: 180,
+                  errorMessage: "Raise your hips higher",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.rightHip,
+                  b: PoseLandmarkType.rightShoulder,
+                  c: null,
+                  minAngle: 10,
+                  maxAngle: 180,
+                  errorMessage: "Raise your hips higher",
+                ),
+              ],
               message: "Hold your position then descend to",
               currentPose: "Single Glute Bridge",
             ),
@@ -288,6 +308,8 @@ class ExerciseTracker {
             PoseLandmarkType.rightShoulder,
             PoseLandmarkType.leftHeel,
             PoseLandmarkType.rightHeel,
+            PoseLandmarkType.leftFootIndex,
+            PoseLandmarkType.rightFootIndex,
           },
           transitions: [
             TransitionRequirements(
@@ -314,7 +336,7 @@ class ExerciseTracker {
               failPaths: [],
             ),
             TransitionRequirements(
-              currentPose: "Sqaut pose",
+              currentPose: "Squat pose",
               message: "Return to a standing position",
               successPath: [
                 Scenario(
@@ -341,7 +363,7 @@ class ExerciseTracker {
                   c: PoseLandmarkType.rightAnkle,
                   minAngle: 45,
                   maxAngle: 180,
-                  errorMessage: "You Went too far down",
+                  errorMessage: "You went too far down",
                 ),
                 Scenario(
                   a: PoseLandmarkType.leftHip,
@@ -349,22 +371,26 @@ class ExerciseTracker {
                   c: PoseLandmarkType.leftAnkle,
                   minAngle: 45,
                   maxAngle: 180,
-                  errorMessage: "You Went too far down",
+                  errorMessage: "You went too far down",
                 ),
-                // Scenario(
-                //   a: PoseLandmarkType.leftKnee,
-                //   b: PoseLandmarkType.leftFootIndex,
-                //   minAngle: 0,
-                //   maxAngle: 90,
-                //   errorMessage: "Your knee is past your foot",
-                // ),
-                // Scenario(
-                //   a: PoseLandmarkType.rightKnee,
-                //   b: PoseLandmarkType.rightFootIndex,
-                //   minAngle: 0,
-                //   maxAngle: 90,
-                //   errorMessage: "Your knee is past your foot",
-                // ),
+                Scenario(
+                  a: PoseLandmarkType.leftShoulder,
+                  b: PoseLandmarkType.leftHip,
+                  c: PoseLandmarkType.leftKnee,
+                  minAngle: 40,
+                  maxAngle: 180,
+                  errorMessage:
+                      "Keep your chest up, don't lean forward too much",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.rightShoulder,
+                  b: PoseLandmarkType.rightHip,
+                  c: PoseLandmarkType.rightKnee,
+                  minAngle: 40,
+                  maxAngle: 180,
+                  errorMessage:
+                      "Keep your chest up, don't lean forward too much",
+                ),
               ],
             ),
           ],
@@ -377,6 +403,10 @@ class ExerciseTracker {
             PoseLandmarkType.rightAnkle,
             PoseLandmarkType.leftFootIndex,
             PoseLandmarkType.rightFootIndex,
+            PoseLandmarkType.leftHeel,
+            PoseLandmarkType.rightHeel,
+            PoseLandmarkType.leftKnee,
+            PoseLandmarkType.rightKnee,
           },
           transitions: [
             TransitionRequirements(
@@ -387,7 +417,7 @@ class ExerciseTracker {
                   a: PoseLandmarkType.leftHeel,
                   b: PoseLandmarkType.leftFootIndex,
                   c: null,
-                  minAngle: 20,
+                  minAngle: 17,
                   maxAngle: 50,
                   errorMessage: "",
                 ),
@@ -395,15 +425,33 @@ class ExerciseTracker {
                   a: PoseLandmarkType.rightHeel,
                   b: PoseLandmarkType.rightFootIndex,
                   c: null,
-                  minAngle: 20,
+                  minAngle: 17,
                   maxAngle: 50,
                   errorMessage: "",
                 ),
               ],
-              failPaths: [],
+              failPaths: [
+                // Additional fail conditions for calf raise
+                Scenario(
+                  a: PoseLandmarkType.leftHip,
+                  b: PoseLandmarkType.leftKnee,
+                  c: PoseLandmarkType.leftAnkle,
+                  minAngle: 160,
+                  maxAngle: 180,
+                  errorMessage: "Keep your knees straight, don't bend them",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.rightHip,
+                  b: PoseLandmarkType.rightKnee,
+                  c: PoseLandmarkType.rightAnkle,
+                  minAngle: 160,
+                  maxAngle: 180,
+                  errorMessage: "Keep your knees straight, don't bend them",
+                ),
+              ],
             ),
             TransitionRequirements(
-              currentPose: "Extended calfs",
+              currentPose: "Extended calves",
               message: "Lower your heels back to the floor",
               successPath: [
                 Scenario(
@@ -423,7 +471,25 @@ class ExerciseTracker {
                   errorMessage: "",
                 ),
               ],
-              failPaths: [],
+              failPaths: [
+                // Additional fail conditions for calf lowering
+                Scenario(
+                  a: PoseLandmarkType.leftHip,
+                  b: PoseLandmarkType.leftKnee,
+                  c: PoseLandmarkType.leftAnkle,
+                  minAngle: 150,
+                  maxAngle: 180,
+                  errorMessage: "Maintain straight legs during the movement",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.rightHip,
+                  b: PoseLandmarkType.rightKnee,
+                  c: PoseLandmarkType.rightAnkle,
+                  minAngle: 150,
+                  maxAngle: 180,
+                  errorMessage: "Maintain straight legs during the movement",
+                ),
+              ],
             ),
           ],
         );
@@ -437,6 +503,10 @@ class ExerciseTracker {
             PoseLandmarkType.rightKnee,
             PoseLandmarkType.leftHeel,
             PoseLandmarkType.rightHeel,
+            PoseLandmarkType.leftHip,
+            PoseLandmarkType.rightHip,
+            PoseLandmarkType.leftShoulder,
+            PoseLandmarkType.rightShoulder,
           },
           transitions: [
             TransitionRequirements(
@@ -482,8 +552,8 @@ class ExerciseTracker {
               failPaths: [],
             ),
             TransitionRequirements(
-              currentPose: "Strected heel",
-              message: "Hold, then return to the intial pose",
+              currentPose: "Stretched heel",
+              message: "Hold, then return to the initial pose",
               successPath: [
                 Scenario(
                   a: PoseLandmarkType.leftHip,
@@ -516,6 +586,8 @@ class ExerciseTracker {
             PoseLandmarkType.rightKnee,
             PoseLandmarkType.leftHip,
             PoseLandmarkType.rightHip,
+            PoseLandmarkType.leftShoulder,
+            PoseLandmarkType.rightShoulder,
           },
           transitions: [
             TransitionRequirements(
@@ -580,7 +652,17 @@ class ExerciseTracker {
                   errorMessage: "",
                 ),
               ],
-              failPaths: [],
+              failPaths: [
+                // Additional fail conditions for single leg stance return
+                Scenario(
+                  a: PoseLandmarkType.leftHip,
+                  b: PoseLandmarkType.rightHip,
+                  c: null,
+                  minAngle: 0,
+                  maxAngle: 5,
+                  errorMessage: "Control your movement, don't drop suddenly",
+                ),
+              ],
             ),
           ],
         );
@@ -597,6 +679,7 @@ class ExerciseTracker {
   final double? targetAngle;
   final List<PoseLandmarkType>? keyJoints;
   final bool? maxAngle;
+  int wrongCount = 0;
 
   bool importantLandmarksConfidence(Pose pose) {
     for (PoseLandmarkType type in importantLandmarks) {
@@ -692,6 +775,11 @@ class ExerciseTracker {
       case -1: // Fail
         message = transitions[currentState].errorMessage!;
         errorFlag = true;
+        ++wrongCount;
+        if (wrongCount >= 15) {
+          currentState = 0;
+          wrongCount = 0;
+        }
         break;
       default: // Neutral
         message = transitions[currentState].message;
