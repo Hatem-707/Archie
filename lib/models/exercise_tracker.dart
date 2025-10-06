@@ -42,7 +42,7 @@ class TransitionRequirements {
   final String currentPose;
   String? errorMessage;
 
-  int evaluateRequirments(Pose pose) {
+  int evaluateRequirements(Pose pose) {
     bool successPathSucceeded = true;
     for (Scenario scenario in successPath) {
       double angle = calculateAngle(
@@ -237,8 +237,24 @@ class ExerciseTracker {
                   a: PoseLandmarkType.rightShoulder,
                   b: PoseLandmarkType.rightHip,
                   c: PoseLandmarkType.rightKnee,
-                  minAngle: 80,
+                  minAngle: 90,
                   maxAngle: 140,
+                  errorMessage: "",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.leftShoulder,
+                  b: PoseLandmarkType.leftHip,
+                  c: PoseLandmarkType.leftKnee,
+                  minAngle: 70,
+                  maxAngle: 110,
+                  errorMessage: "",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.leftAnkle,
+                  b: PoseLandmarkType.leftKnee,
+                  c: PoseLandmarkType.leftHip,
+                  minAngle: 70,
+                  maxAngle: 110,
                   errorMessage: "",
                 ),
               ],
@@ -247,7 +263,7 @@ class ExerciseTracker {
                   a: PoseLandmarkType.leftShoulder,
                   b: PoseLandmarkType.leftHip,
                   c: PoseLandmarkType.leftKnee,
-                  minAngle: 80,
+                  minAngle: 90,
                   maxAngle: 140,
                   errorMessage: "",
                 ),
@@ -256,7 +272,15 @@ class ExerciseTracker {
                   b: PoseLandmarkType.rightHip,
                   c: PoseLandmarkType.rightKnee,
                   minAngle: 70,
-                  maxAngle: 130,
+                  maxAngle: 110,
+                  errorMessage: "",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.rightHip,
+                  b: PoseLandmarkType.rightKnee,
+                  c: PoseLandmarkType.rightHeel,
+                  minAngle: 70,
+                  maxAngle: 110,
                   errorMessage: "",
                 ),
               ],
@@ -333,7 +357,15 @@ class ExerciseTracker {
                   errorMessage: "",
                 ),
               ],
-              failPaths: [],
+              failPaths: [
+                Scenario(
+                  a: PoseLandmarkType.leftAnkle,
+                  b: PoseLandmarkType.rightAnkle,
+                  minAngle: 0,
+                  maxAngle: 40,
+                  errorMessage: "Keep Your feet on the ground",
+                ),
+              ],
             ),
             TransitionRequirements(
               currentPose: "Squat pose",
@@ -549,7 +581,15 @@ class ExerciseTracker {
                   errorMessage: "",
                 ),
               ],
-              failPaths: [],
+              failPaths: [
+                Scenario(
+                  a: PoseLandmarkType.leftAnkle,
+                  b: PoseLandmarkType.rightAnkle,
+                  minAngle: 0,
+                  maxAngle: 40,
+                  errorMessage: "Keep Your feet on the ground",
+                ),
+              ],
             ),
             TransitionRequirements(
               currentPose: "Stretched heel",
@@ -572,7 +612,15 @@ class ExerciseTracker {
                   errorMessage: "",
                 ),
               ],
-              failPaths: [],
+              failPaths: [
+                Scenario(
+                  a: PoseLandmarkType.leftAnkle,
+                  b: PoseLandmarkType.rightAnkle,
+                  minAngle: 0,
+                  maxAngle: 40,
+                  errorMessage: "Keep Your feet on the ground",
+                ),
+              ],
             ),
           ],
         );
@@ -598,8 +646,16 @@ class ExerciseTracker {
                   a: PoseLandmarkType.leftHip,
                   b: PoseLandmarkType.leftKnee,
                   c: PoseLandmarkType.leftAnkle,
-                  minAngle: 100,
-                  maxAngle: 140,
+                  minAngle: 70,
+                  maxAngle: 110,
+                  errorMessage: "",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.leftShoulder,
+                  b: PoseLandmarkType.leftHip,
+                  c: PoseLandmarkType.leftKnee,
+                  minAngle: 70,
+                  maxAngle: 110,
                   errorMessage: "",
                 ),
                 Scenario(
@@ -616,8 +672,16 @@ class ExerciseTracker {
                   a: PoseLandmarkType.rightHip,
                   b: PoseLandmarkType.rightKnee,
                   c: PoseLandmarkType.rightAnkle,
-                  minAngle: 100,
-                  maxAngle: 140,
+                  minAngle: 70,
+                  maxAngle: 110,
+                  errorMessage: "",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.rightShoulder,
+                  b: PoseLandmarkType.rightHip,
+                  c: PoseLandmarkType.rightKnee,
+                  minAngle: 70,
+                  maxAngle: 110,
                   errorMessage: "",
                 ),
                 Scenario(
@@ -629,7 +693,15 @@ class ExerciseTracker {
                   errorMessage: "",
                 ),
               ],
-              failPaths: [],
+              failPaths: [
+                // Scenario(
+                //   a: PoseLandmarkType.leftHip,
+                //   b: PoseLandmarkType.leftShoulder,
+                //   minAngle: 50,
+                //   maxAngle: 90,
+                //   errorMessage: "Keep your back straight",
+                // ),
+              ],
             ),
             TransitionRequirements(
               currentPose: "One leg lift",
@@ -639,7 +711,15 @@ class ExerciseTracker {
                   a: PoseLandmarkType.leftHip,
                   b: PoseLandmarkType.leftKnee,
                   c: PoseLandmarkType.leftAnkle,
-                  minAngle: 165,
+                  minAngle: 150,
+                  maxAngle: 180,
+                  errorMessage: "",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.rightShoulder,
+                  b: PoseLandmarkType.rightHip,
+                  c: PoseLandmarkType.rightKnee,
+                  minAngle: 150,
                   maxAngle: 180,
                   errorMessage: "",
                 ),
@@ -647,21 +727,47 @@ class ExerciseTracker {
                   a: PoseLandmarkType.rightHip,
                   b: PoseLandmarkType.rightKnee,
                   c: PoseLandmarkType.rightAnkle,
-                  minAngle: 165,
+                  minAngle: 150,
+                  maxAngle: 180,
+                  errorMessage: "",
+                ),
+              ],
+              alternatePath: [
+                Scenario(
+                  a: PoseLandmarkType.leftShoulder,
+                  b: PoseLandmarkType.leftHip,
+                  c: PoseLandmarkType.leftKnee,
+                  minAngle: 150,
+                  maxAngle: 180,
+                  errorMessage: "",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.leftHip,
+                  b: PoseLandmarkType.leftKnee,
+                  c: PoseLandmarkType.leftAnkle,
+                  minAngle: 150,
+                  maxAngle: 180,
+                  errorMessage: "",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.rightHip,
+                  b: PoseLandmarkType.rightKnee,
+                  c: PoseLandmarkType.rightAnkle,
+                  minAngle: 150,
                   maxAngle: 180,
                   errorMessage: "",
                 ),
               ],
               failPaths: [
                 // Additional fail conditions for single leg stance return
-                Scenario(
-                  a: PoseLandmarkType.leftHip,
-                  b: PoseLandmarkType.rightHip,
-                  c: null,
-                  minAngle: 0,
-                  maxAngle: 5,
-                  errorMessage: "Control your movement, don't drop suddenly",
-                ),
+                // Scenario(
+                //   a: PoseLandmarkType.leftHip,
+                //   b: PoseLandmarkType.rightHip,
+                //   c: null,
+                //   minAngle: 0,
+                //   maxAngle: 15,
+                //   errorMessage: "Control your movement, don't drop suddenly",
+                // ),
               ],
             ),
           ],
@@ -709,7 +815,7 @@ class ExerciseTracker {
     }
 
     errorFlag = false; // Reset error flag at the beginning
-    int evaluation = transitions[currentState].evaluateRequirments(pose);
+    int evaluation = transitions[currentState].evaluateRequirements(pose);
 
     switch (evaluation) {
       case 1: // Success
