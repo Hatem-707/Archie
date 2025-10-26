@@ -125,8 +125,9 @@ class TransitionRequirements {
       // Clamp the value to the valid range for acos to avoid NaN errors
       cosineAngle = cosineAngle.clamp(-1.0, 1.0);
       result = acos(cosineAngle) * 180 / pi;
+      result = (result == 0) ? 180: result;
     }
-    return (result == 0) ? 180 : result.abs();
+    return  result.abs();
   }
 }
 
