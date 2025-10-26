@@ -1,4 +1,4 @@
-import 'package:feetly/controllers/exercise_form_provider.dart';
+import 'package:archie/controllers/exercise_form_provider.dart';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
 import 'dart:math';
 
@@ -253,8 +253,8 @@ class ExerciseTracker {
                   a: PoseLandmarkType.leftAnkle,
                   b: PoseLandmarkType.leftKnee,
                   c: PoseLandmarkType.leftHip,
-                  minAngle: 70,
-                  maxAngle: 110,
+                  minAngle: 60,
+                  maxAngle: 130,
                   errorMessage: "",
                 ),
               ],
@@ -279,8 +279,8 @@ class ExerciseTracker {
                   a: PoseLandmarkType.rightHip,
                   b: PoseLandmarkType.rightKnee,
                   c: PoseLandmarkType.rightHeel,
-                  minAngle: 70,
-                  maxAngle: 110,
+                  minAngle: 60,
+                  maxAngle: 130,
                   errorMessage: "",
                 ),
               ],

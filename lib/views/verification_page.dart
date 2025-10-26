@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:feetly/auth/auth_gate.dart';
-import 'package:feetly/auth/auth_service.dart';
+import 'package:archie/auth/auth_gate.dart';
+import 'package:archie/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

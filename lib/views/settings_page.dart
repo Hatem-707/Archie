@@ -1,6 +1,6 @@
-import 'package:feetly/auth/auth_service.dart';
-import 'package:feetly/controllers/theme_provider.dart';
-import 'package:feetly/views/change_password.dart';
+import 'package:archie/auth/auth_service.dart';
+import 'package:archie/controllers/theme_provider.dart';
+import 'package:archie/views/change_password.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

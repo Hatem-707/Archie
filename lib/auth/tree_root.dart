@@ -1,5 +1,5 @@
-import 'package:feetly/views/login_page.dart';
-import 'package:feetly/views/register_page.dart';
+import 'package:archie/views/login_page.dart';
+import 'package:archie/views/register_page.dart';
 import 'package:flutter/material.dart';
 
 class TreeRoot extends StatefulWidget {

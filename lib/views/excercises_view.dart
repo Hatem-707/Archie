@@ -1,4 +1,4 @@
-import 'package:feetly/views/video_view.dart';
+import 'package:archie/views/video_view.dart';
 import 'package:flutter/material.dart';
 
 class ExercisesView extends StatelessWidget {

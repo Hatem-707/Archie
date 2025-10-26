@@ -1,5 +1,5 @@
-import 'package:feetly/auth/tree_root.dart';
-import 'package:feetly/views/home_page.dart';
+import 'package:archie/auth/tree_root.dart';
+import 'package:archie/views/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

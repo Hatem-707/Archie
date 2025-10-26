@@ -1,8 +1,9 @@
-import 'package:feetly/auth/auth_service.dart';
-import 'package:feetly/widgets/big_button.dart';
-import 'package:feetly/widgets/hero_icon.dart';
-import 'package:feetly/widgets/input_widget.dart';
+import 'package:archie/auth/auth_service.dart';
+import 'package:archie/widgets/big_button.dart';
+import 'package:archie/widgets/hero_icon.dart';
+import 'package:archie/widgets/input_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, required this.switchPages});
@@ -52,7 +53,35 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            HeroIcon(edge: 100),
+            Container(
+              height: 160,
+              width: 160,
+              margin: EdgeInsets.all(25),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.primary,
+                borderRadius: BorderRadius.circular(80),
+                border: Border.all(
+                  width: 4,
+                  color: theme.colorScheme.secondary,
+                ),
+              ),
+              padding: EdgeInsets.all(30),
+              child: SvgPicture.asset(
+                'assets/icons/logo.svg',
+                colorFilter: ColorFilter.mode(
+                  theme.colorScheme.onPrimary,
+                  BlendMode.srcIn,
+                ),
+                fit: BoxFit.fill,
+              ),
+            ),
+            Text(
+              "Archie, Your feet's companion",
+              style: theme.textTheme.headlineMedium!.copyWith(
+                color: theme.colorScheme.primary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             SizedBox(height: 25),
             Text(
               "Welcome back! Please login.",

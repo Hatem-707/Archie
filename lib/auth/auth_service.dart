@@ -1,4 +1,4 @@
-import 'package:feetly/controllers/loading_mixin.dart';
+import 'package:archie/controllers/loading_mixin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

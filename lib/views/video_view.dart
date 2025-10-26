@@ -1,5 +1,5 @@
-import 'package:feetly/models/camera_feed.dart';
-import 'package:feetly/views/excercises_view.dart';
+import 'package:archie/models/camera_feed.dart';
+import 'package:archie/views/excercises_view.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';

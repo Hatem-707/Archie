@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "551988849500",
-    "project_id": "feetly-e0551",
-    "storage_bucket": "feetly-e0551.firebasestorage.app"
+    "project_number": "227491821417",
+    "project_id": "archie-88aa7",
+    "storage_bucket": "archie-88aa7.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:551988849500:android:cfc29d021e442e066aaf99",
+        "mobilesdk_app_id": "1:227491821417:android:a80d841bedc39abee32ff8",
         "android_client_info": {
           "package_name": "com.example.feetly"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyChzkIGZGXjNuwCedSvjk1bJoyr6M2tOJw"
+          "current_key": "AIzaSyD1FsALdsQpHHLDENqMPj8EcF21dyjVKT8"
         }
       ],
       "services": {

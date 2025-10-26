@@ -1,5 +1,5 @@
-import 'package:feetly/controllers/page_provider.dart';
-import 'package:feetly/widgets/svg_icon.dart';
+import 'package:archie/controllers/page_provider.dart';
+import 'package:archie/widgets/svg_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

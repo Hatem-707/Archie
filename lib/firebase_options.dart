@@ -51,19 +51,19 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyChzkIGZGXjNuwCedSvjk1bJoyr6M2tOJw',
-    appId: '1:551988849500:android:cfc29d021e442e066aaf99',
-    messagingSenderId: '551988849500',
-    projectId: 'feetly-e0551',
-    storageBucket: 'feetly-e0551.firebasestorage.app',
+    apiKey: 'AIzaSyD1FsALdsQpHHLDENqMPj8EcF21dyjVKT8',
+    appId: '1:227491821417:android:a80d841bedc39abee32ff8',
+    messagingSenderId: '227491821417',
+    projectId: 'archie-88aa7',
+    storageBucket: 'archie-88aa7.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAITIy5Hp9hxIzoUDoTkaYZLIPG-GqtePk',
-    appId: '1:551988849500:ios:4547706cdb3048db6aaf99',
-    messagingSenderId: '551988849500',
-    projectId: 'feetly-e0551',
-    storageBucket: 'feetly-e0551.firebasestorage.app',
+    apiKey: 'AIzaSyCWGOKsOY9z-bqgk8C1yI3xRuMSj5L9P1w',
+    appId: '1:227491821417:ios:9fc4185090240511e32ff8',
+    messagingSenderId: '227491821417',
+    projectId: 'archie-88aa7',
+    storageBucket: 'archie-88aa7.firebasestorage.app',
     iosBundleId: 'com.example.feetly',
   );
 

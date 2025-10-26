@@ -1,10 +1,10 @@
-import 'package:feetly/auth/auth_service.dart';
-import 'package:feetly/controllers/page_provider.dart';
-import 'package:feetly/views/excercises_view.dart';
-import 'package:feetly/views/facts_view.dart';
-import 'package:feetly/views/settings_page.dart';
-import 'package:feetly/views/shoes_view.dart';
-import 'package:feetly/widgets/my_nav_bar.dart';
+import 'package:archie/auth/auth_service.dart';
+import 'package:archie/controllers/page_provider.dart';
+import 'package:archie/views/excercises_view.dart';
+import 'package:archie/views/facts_view.dart';
+import 'package:archie/views/settings_page.dart';
+import 'package:archie/views/shoes_view.dart';
+import 'package:archie/widgets/my_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              "Feetly",
+              "Archie",
               style: theme.textTheme.headlineMedium!.copyWith(
                 fontWeight: FontWeight.bold,
                 color: theme.colorScheme.primary,

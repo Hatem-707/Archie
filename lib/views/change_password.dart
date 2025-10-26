@@ -1,7 +1,7 @@
-import 'package:feetly/auth/auth_service.dart';
-import 'package:feetly/widgets/big_button.dart';
-import 'package:feetly/widgets/hero_icon.dart';
-import 'package:feetly/widgets/input_widget.dart';
+import 'package:archie/auth/auth_service.dart';
+import 'package:archie/widgets/big_button.dart';
+import 'package:archie/widgets/hero_icon.dart';
+import 'package:archie/widgets/input_widget.dart';
 import 'package:flutter/material.dart';
 
 class ChangePassword extends StatefulWidget {
@@ -65,8 +65,6 @@ class _ChangePasswordState extends State<ChangePassword> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            HeroIcon(edge: 100),
-            SizedBox(height: 25),
             Text(
               "Let's change the password",
               style: theme.textTheme.headlineSmall!.copyWith(

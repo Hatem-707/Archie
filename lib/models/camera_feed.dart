@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:camera/camera.dart';
-import 'package:feetly/controllers/exercise_form_provider.dart';
-import 'package:feetly/models/exercise_tracker.dart';
-import 'package:feetly/models/painter.dart';
+import 'package:archie/controllers/exercise_form_provider.dart';
+import 'package:archie/models/exercise_tracker.dart';
+import 'package:archie/models/painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mlkit_commons/google_mlkit_commons.dart';

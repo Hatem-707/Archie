@@ -1,8 +1,8 @@
-import 'package:feetly/auth/auth_gate.dart';
-import 'package:feetly/controllers/page_provider.dart';
-import 'package:feetly/controllers/theme_provider.dart';
-import 'package:feetly/firebase_options.dart';
-import 'package:feetly/themes/theme.dart';
+import 'package:archie/auth/auth_gate.dart';
+import 'package:archie/controllers/page_provider.dart';
+import 'package:archie/controllers/theme_provider.dart';
+import 'package:archie/firebase_options.dart';
+import 'package:archie/themes/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
