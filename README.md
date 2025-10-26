@@ -1,4 +1,4 @@
-# Ar## 🎥 Demo Videos
+### 🎥 Demo Videos
 
 ### App Preview
 <video src="https://github.com/user-attachments/assets/26a54b23-2e49-4e8e-8841-25da977c4c67" controls="controls" style="max-width: 730px;">
