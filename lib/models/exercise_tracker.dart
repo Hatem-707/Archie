@@ -89,6 +89,7 @@ class TransitionRequirements {
           (angle <= scenario.minAngle || angle >= scenario.maxAngle)) {
         fail = true;
         errorMessage = scenario.errorMessage;
+        print("the angle is $angle");
         break;
       }
     }
@@ -126,7 +127,7 @@ class TransitionRequirements {
       cosineAngle = cosineAngle.clamp(-1.0, 1.0);
       result = acos(cosineAngle) * 180 / pi;
     }
-    return result.abs();
+    return (result == 0) ? 180 : result.abs();
   }
 }
 
@@ -200,7 +201,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.leftKnee,
                   c: PoseLandmarkType.leftAnkle,
                   minAngle: 30,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "Your legs are too close to you",
                 ),
                 Scenario(
@@ -216,7 +217,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.rightKnee,
                   c: PoseLandmarkType.rightAnkle,
                   minAngle: 30,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "Your legs are too close to you",
                 ),
                 Scenario(
@@ -291,7 +292,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.leftShoulder,
                   c: null,
                   minAngle: 10,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "Raise your hips higher",
                 ),
                 Scenario(
@@ -299,7 +300,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.rightShoulder,
                   c: null,
                   minAngle: 10,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "Raise your hips higher",
                 ),
               ],
@@ -376,7 +377,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.leftKnee,
                   c: PoseLandmarkType.leftAnkle,
                   minAngle: 160,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "",
                 ),
                 Scenario(
@@ -384,7 +385,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.rightKnee,
                   c: PoseLandmarkType.rightAnkle,
                   minAngle: 160,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "",
                 ),
               ],
@@ -394,7 +395,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.rightKnee,
                   c: PoseLandmarkType.rightAnkle,
                   minAngle: 45,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "You went too far down",
                 ),
                 Scenario(
@@ -402,7 +403,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.leftKnee,
                   c: PoseLandmarkType.leftAnkle,
                   minAngle: 45,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "You went too far down",
                 ),
                 Scenario(
@@ -410,7 +411,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.leftHip,
                   c: PoseLandmarkType.leftKnee,
                   minAngle: 40,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage:
                       "Keep your chest up, don't lean forward too much",
                 ),
@@ -419,7 +420,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.rightHip,
                   c: PoseLandmarkType.rightKnee,
                   minAngle: 40,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage:
                       "Keep your chest up, don't lean forward too much",
                 ),
@@ -469,7 +470,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.leftKnee,
                   c: PoseLandmarkType.leftAnkle,
                   minAngle: 160,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "Keep your knees straight, don't bend them",
                 ),
                 Scenario(
@@ -477,7 +478,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.rightKnee,
                   c: PoseLandmarkType.rightAnkle,
                   minAngle: 160,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "Keep your knees straight, don't bend them",
                 ),
               ],
@@ -510,7 +511,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.leftKnee,
                   c: PoseLandmarkType.leftAnkle,
                   minAngle: 150,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "Maintain straight legs during the movement",
                 ),
                 Scenario(
@@ -518,7 +519,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.rightKnee,
                   c: PoseLandmarkType.rightAnkle,
                   minAngle: 150,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "Maintain straight legs during the movement",
                 ),
               ],
@@ -550,8 +551,8 @@ class ExerciseTracker {
                   a: PoseLandmarkType.leftHip,
                   b: PoseLandmarkType.leftKnee,
                   c: PoseLandmarkType.leftAnkle,
-                  minAngle: 90,
-                  maxAngle: 140,
+                  minAngle: 100,
+                  maxAngle: 150,
                   errorMessage: "",
                 ),
                 Scenario(
@@ -568,8 +569,8 @@ class ExerciseTracker {
                   a: PoseLandmarkType.rightHip,
                   b: PoseLandmarkType.rightKnee,
                   c: PoseLandmarkType.rightAnkle,
-                  minAngle: 90,
-                  maxAngle: 155,
+                  minAngle: 100,
+                  maxAngle: 150,
                   errorMessage: "",
                 ),
                 Scenario(
@@ -577,16 +578,25 @@ class ExerciseTracker {
                   b: PoseLandmarkType.leftKnee,
                   c: PoseLandmarkType.leftAnkle,
                   minAngle: 165,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "",
                 ),
               ],
               failPaths: [
                 Scenario(
-                  a: PoseLandmarkType.leftAnkle,
-                  b: PoseLandmarkType.rightAnkle,
-                  minAngle: 0,
-                  maxAngle: 40,
+                  a: PoseLandmarkType.leftHeel,
+                  b: PoseLandmarkType.leftKnee,
+                  c: PoseLandmarkType.leftHip,
+                  minAngle: 90,
+                  maxAngle: 181,
+                  errorMessage: "Keep Your feet on the ground",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.rightHeel,
+                  b: PoseLandmarkType.rightKnee,
+                  c: PoseLandmarkType.rightHeel,
+                  minAngle: 90,
+                  maxAngle: 181,
                   errorMessage: "Keep Your feet on the ground",
                 ),
               ],
@@ -600,7 +610,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.leftKnee,
                   c: PoseLandmarkType.leftAnkle,
                   minAngle: 165,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "",
                 ),
                 Scenario(
@@ -608,16 +618,25 @@ class ExerciseTracker {
                   b: PoseLandmarkType.rightKnee,
                   c: PoseLandmarkType.rightAnkle,
                   minAngle: 165,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "",
                 ),
               ],
               failPaths: [
                 Scenario(
-                  a: PoseLandmarkType.leftAnkle,
-                  b: PoseLandmarkType.rightAnkle,
-                  minAngle: 0,
-                  maxAngle: 40,
+                  a: PoseLandmarkType.leftHeel,
+                  b: PoseLandmarkType.leftKnee,
+                  c: PoseLandmarkType.leftHip,
+                  minAngle: 90,
+                  maxAngle: 181,
+                  errorMessage: "Keep Your feet on the ground",
+                ),
+                Scenario(
+                  a: PoseLandmarkType.rightHeel,
+                  b: PoseLandmarkType.rightKnee,
+                  c: PoseLandmarkType.rightHeel,
+                  minAngle: 90,
+                  maxAngle: 181,
                   errorMessage: "Keep Your feet on the ground",
                 ),
               ],
@@ -663,7 +682,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.rightKnee,
                   c: PoseLandmarkType.rightAnkle,
                   minAngle: 165,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "",
                 ),
               ],
@@ -689,7 +708,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.leftKnee,
                   c: PoseLandmarkType.leftAnkle,
                   minAngle: 165,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "",
                 ),
               ],
@@ -712,7 +731,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.leftKnee,
                   c: PoseLandmarkType.leftAnkle,
                   minAngle: 150,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "",
                 ),
                 Scenario(
@@ -720,7 +739,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.rightHip,
                   c: PoseLandmarkType.rightKnee,
                   minAngle: 150,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "",
                 ),
                 Scenario(
@@ -728,7 +747,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.rightKnee,
                   c: PoseLandmarkType.rightAnkle,
                   minAngle: 150,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "",
                 ),
               ],
@@ -738,7 +757,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.leftHip,
                   c: PoseLandmarkType.leftKnee,
                   minAngle: 150,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "",
                 ),
                 Scenario(
@@ -746,7 +765,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.leftKnee,
                   c: PoseLandmarkType.leftAnkle,
                   minAngle: 150,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "",
                 ),
                 Scenario(
@@ -754,7 +773,7 @@ class ExerciseTracker {
                   b: PoseLandmarkType.rightKnee,
                   c: PoseLandmarkType.rightAnkle,
                   minAngle: 150,
-                  maxAngle: 180,
+                  maxAngle: 181,
                   errorMessage: "",
                 ),
               ],
