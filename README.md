@@ -1,4 +1,16 @@
-# Archie - AI Powered Physical Therapy Assistant
+# Ar## 🎥 Demo Videos
+
+### App Preview
+https://user-images.githubusercontent.com/YOUR_USER_ID/Archie/assets/app_preview.mp4
+
+<video src="https://user-images.githubusercontent.com/YOUR_USER_ID/Archie/assets/app_preview.mp4" controls="controls" style="max-width: 730px;">
+</video>
+
+### Glute Bridge Exercise Demo
+https://user-images.githubusercontent.com/YOUR_USER_ID/Archie/assets/glute_bridge_demo.mp4
+
+<video src="https://user-images.githubusercontent.com/YOUR_USER_ID/Archie/assets/glute_bridge_demo.mp4" controls="controls" style="max-width: 730px;">
+</video>AI Powered Physical Therapy Assistant
 
 Archie is a cross-platform mobile application built with Flutter that acts as a personal physical therapy assistant. It leverages the power of machine learning to guide users through various exercises, providing real-time feedback on their form and posture.
 
