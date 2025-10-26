@@ -1,25 +1,19 @@
 # Ar## 🎥 Demo Videos
 
 ### App Preview
-https://user-images.githubusercontent.com/181294485/Archie/videos/app_preview.mp4
-
-<video src="https://user-images.githubusercontent.com/181294485/Archie/videos/app_preview.mp4" controls="controls" style="max-width: 730px;">
+https://github.com/user-attachments/assets/26a54b23-2e49-4e8e-8841-25da977c4c67
+<video src="https://github.com/user-attachments/assets/26a54b23-2e49-4e8e-8841-25da977c4c67" controls="controls" style="max-width: 730px;">
 </video>
 
 ### Glute Bridge Exercise Demo
-https://user-images.githubusercontent.com/181294485/Archie/videos/glute_bridge_demo.mp4
+https://github.com/user-attachments/assets/211181a6-17fd-4650-8968-bdc67524d8f9
 
-<video src="https://user-images.githubusercontent.com/181294485/Archie/videos/glute_bridge_demo.mp4" controls="controls" style="max-width: 730px;">
+<video src="https://github.com/user-attachments/assets/211181a6-17fd-4650-8968-bdc67524d8f9" controls="controls" style="max-width: 730px;">
 </video>AI Powered Physical Therapy Assistant
 
 Archie is a cross-platform mobile application built with Flutter that acts as a personal physical therapy assistant. It leverages the power of machine learning to guide users through various exercises, providing real-time feedback on their form and posture.
 
-## 🎥 Demo Videos
 
-### App Preview
-https://github.com/Hatem-707/Archie/master/videos/app_preview.mp4
-### Glute Bridge Exercise Demo
-https://github.com/Hatem-707/Archie/master/videos/glute_bridge_demo.mp4
 ## ✨ Key Features
 
 *   **AI-Powered Exercise Tracking:** Utilizes Google's ML Kit for real-time pose detection and analysis, ensuring users perform exercises correctly and safely.
