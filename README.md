@@ -1,13 +1,10 @@
 # Ar## 🎥 Demo Videos
 
 ### App Preview
-https://github.com/user-attachments/assets/26a54b23-2e49-4e8e-8841-25da977c4c67
 <video src="https://github.com/user-attachments/assets/26a54b23-2e49-4e8e-8841-25da977c4c67" controls="controls" style="max-width: 730px;">
 </video>
 
 ### Glute Bridge Exercise Demo
-https://github.com/user-attachments/assets/211181a6-17fd-4650-8968-bdc67524d8f9
-
 <video src="https://github.com/user-attachments/assets/211181a6-17fd-4650-8968-bdc67524d8f9" controls="controls" style="max-width: 730px;">
 </video>AI Powered Physical Therapy Assistant
 
